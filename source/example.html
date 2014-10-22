@@ -7,15 +7,10 @@
 	<style>
 		* { margin: 0; padding: 0; border: 0; }
 		body { font: normal normal normal 16px/24px sans-serif; }
-		svg { display: block; width: 870px; height: 435px; padding: 20px 5px; }
-		path { stroke: white; stroke-width: 1px; }
-		span { display: inline-block; padding: 0 5px; text-transform: uppercase; cursor: pointer; }
-
+		svg { display: block; width: 870px; height: 435px; padding: 20px; }
+		path { stroke: white; stroke-width: 2px; stroke-linecap: round; }
 		path.hidden { display: none; }
 		path.visible { opacity: .5; }
-
-		span.hidden { display: .5; }
-		span.visible { opacity: 1; }
 
 		#kba { fill: #FF9900; }
 		#ktt { fill: #77DDDD; }
@@ -99,38 +94,13 @@
 		#ose { fill: #33CCCC; }
 	</style>
 	<script>
-
-		function toggleClass(path, span) {
-			var state = (path.getAttribute('class') == 'visible') ? 'hidden' : 'visible';
-
-			span.setAttribute('class', state);
-			path.setAttribute('class', state);
-		};
-
 		function createToggle(path){
-			var span = document.createElement('span');
-
 			path.setAttribute('class', 'visible');
-			span.setAttribute('id', '_' + path.id);
-			span.setAttribute('class', 'visible');
-
-			span.innerHTML = path.id;
-
-			span.addEventListener('click', function(ev) {
-				var span = ev.target,
-					path = document.getElementById(span.innerHTML);
-
-				toggleClass(path, span);
-			}, false);
 
 			path.addEventListener('click', function(ev) {
-				var path = ev.target,
-					span = document.getElementById('_' + path.id);
-
-				toggleClass(path, span);
+				var path = ev.target;
+				path.setAttribute('class', (path.getAttribute('class') == 'visible') ? 'hidden' : 'visible');
 			}, false);
-
-			document.body.appendChild(span);
 		};
 
 		document.addEventListener('DOMContentLoaded', function() {
